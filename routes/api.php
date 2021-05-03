@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostingController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +19,15 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::post('/register', [UserController::class, 'create']);
+
+Route::get('/postings/all', [PostingController::class, 'index']); 
+
+Route::post('/postings/update/{id}', [PostingController::class, 'update']); 
+
+Route::post('/postings/create', [PostingController::class, 'create']); 
+
+Route::get('/postings/destroy/{id}', [PostingController::class, 'destroy']);
+
