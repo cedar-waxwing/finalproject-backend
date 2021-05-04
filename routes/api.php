@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PostingController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -27,10 +27,10 @@ Route::group(['middleware' => ['auth:api']], function () {
 });
 
 
-Route::get('/postings/all', [PostingController::class, 'index']);
+Route::get('/posts/all', [PostController::class, 'index']);
 
-Route::post('/postings/update/{id}', [PostingController::class, 'update']);
+Route::post('/posts/update/{id}', [PostController::class, 'update']);
 
-Route::post('/postings/create', [PostingController::class, 'create']);
+Route::post('/posts/create', [PostController::class, 'create']);
 
-Route::get('/postings/destroy/{id}', [PostingController::class, 'destroy']);
+Route::get('/posts/destroy/{id}', [PostController::class, 'destroy']);
