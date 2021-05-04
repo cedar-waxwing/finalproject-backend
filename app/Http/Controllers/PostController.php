@@ -71,7 +71,7 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        Post::find($id)->delete();
-      return "Successfully deleted.";
+        Post::destroy($id);
+      return "Successfully deleted post " .$id;
     }
 }
