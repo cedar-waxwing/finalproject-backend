@@ -16,18 +16,21 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 
 Route::post('/register', [UserController::class, 'create']);
 
-Route::get('/postings/all', [PostingController::class, 'index']); 
+Route::group(['middleware' => ['auth:api']], function () {
+    // gets user with all order data
+    Route::get('/user', [UserController::class, 'index']);
+    // log out user
+    Route::get('/logout', [UserController::class, 'logout']);
+});
 
-Route::post('/postings/update/{id}', [PostingController::class, 'update']); 
 
-Route::post('/postings/create', [PostingController::class, 'create']); 
+Route::get('/postings/all', [PostingController::class, 'index']);
+
+Route::post('/postings/update/{id}', [PostingController::class, 'update']);
+
+Route::post('/postings/create', [PostingController::class, 'create']);
 
 Route::get('/postings/destroy/{id}', [PostingController::class, 'destroy']);
-
