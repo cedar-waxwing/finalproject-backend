@@ -19,6 +19,8 @@ class CreatePostsTable extends Migration
             $table->char('description');
             $table->integer('price');
             $table->char('contact');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

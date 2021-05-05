@@ -15,11 +15,11 @@ class PostController extends Controller
     public function index()
     {
         return Post::all();
-      //Read
+        //Read
     }
 
 
-      public function show($id)
+    public function show($id)
     {
         return Post::find($id);
         //Read, individual post
@@ -38,9 +38,10 @@ class PostController extends Controller
         $post->description = $request->description;
         $post->price = $request->price;
         $post->contact = $request->contact;
+        $post->user_id = $request->user()->id;
 
-    $post->save(); //Create
-    return $post->toArray();
+        $post->save(); //Create
+        return $post->toArray();
     }
 
     /**
@@ -51,16 +52,16 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-           $post = Post::find($id);
+        $post = Post::find($id);
 
-    // takes in user input -- prevents error when you change just one item
-    $post->title = $request->title;
-    $post->description = $request->description;
-    $post->price = $request->price;
-    $post->contact = $request->contact;
+        // takes in user input -- prevents error when you change just one item
+        $post->title = $request->title;
+        $post->description = $request->description;
+        $post->price = $request->price;
+        $post->contact = $request->contact;
 
-    $post->save(); //Update
-    return $post->toArray();
+        $post->save(); //Update
+        return $post->toArray();
     }
 
     /**
@@ -72,6 +73,6 @@ class PostController extends Controller
     public function destroy($id)
     {
         Post::destroy($id);
-      return "Successfully deleted post " .$id;
+        return "Successfully deleted post " . $id;
     }
 }
