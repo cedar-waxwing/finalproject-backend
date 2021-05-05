@@ -14,10 +14,15 @@ class PostController extends Controller
      */
     public function index()
     {
-        return Post::all();
+        return Post::all()->toArray();
         //Read
     }
 
+    //using eloquent
+    public function myposts(Request $request)
+    {
+        return Post::where('user_id', $request->user()->id)->get()->toArray();
+    }
 
     public function show($id)
     {

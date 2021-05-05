@@ -25,7 +25,9 @@ Route::group(['middleware' => ['auth:api']], function () {
     // log out user
     Route::get('/logout', [UserController::class, 'logout']);
     //create posts
-    Route::post('/posts/create', [PostController::class, 'create']);
+    Route::post('/post/create', [PostController::class, 'create']);
+    //get my posts when logged in
+    Route::get('/posts/my', [PostController::class, 'myposts']);
 });
 
 

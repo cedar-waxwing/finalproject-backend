@@ -24,6 +24,10 @@ class User extends Authenticatable
         'password',
     ];
 
+    protected $with = [
+        'posts'
+    ];
+
 
     protected $hidden = [
         'password',
