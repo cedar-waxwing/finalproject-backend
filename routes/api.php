@@ -30,8 +30,9 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::get('/posts/my', [PostController::class, 'myposts']);
 });
 
-
 Route::get('/posts/all', [PostController::class, 'index']);
+
+Route::post('/search', [PostController::class, 'search']);
 
 // Route::post('/posts/update/{id}', [PostController::class, 'update']);
 

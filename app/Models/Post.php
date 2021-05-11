@@ -17,7 +17,7 @@ public $incrementing = true;
 public $timestamps = true;
 
 protected $fillable = [
-      'title', 'description', 'price', 'contact', 'user_id'
+      'image', 'title', 'description', 'price', 'contact', 'user_id'
 ];
 
 //eloquent relationship -- because 1:many, many:1 relationship between user and created posts

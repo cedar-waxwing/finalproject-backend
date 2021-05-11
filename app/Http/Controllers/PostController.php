@@ -18,6 +18,24 @@ class PostController extends Controller
         //Read
     }
 
+//this function is to search through posts. Not using eloquent.
+
+//Limit this to alphanumeric on the front end to prevent injection
+public function search(Request $request)
+{
+    //get search value from the request
+    $search = $request->search;
+
+    //search in the title and description columns from the post table
+    $post = Post::query()
+    ->where('title', 'like', "%".$search."%")
+    ->orWhere('description', 'like', "%".$search."%")
+    ->get();
+
+    //return the search view with the results compacted
+    return $post;
+}
+
     //using eloquent
     public function myposts(Request $request)
     {
@@ -39,6 +57,7 @@ class PostController extends Controller
     {
         $post = new Post();
 
+        $post->image = $request->image;
         $post->title = $request->title;
         $post->description = $request->description;
         $post->price = $request->price;
@@ -60,6 +79,7 @@ class PostController extends Controller
         $post = Post::find($id);
 
         // takes in user input -- prevents error when you change just one item
+        $post->image = $request->image;
         $post->title = $request->title;
         $post->description = $request->description;
         $post->price = $request->price;

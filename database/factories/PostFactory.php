@@ -22,7 +22,10 @@ class PostFactory extends Factory
      */
     public function definition()
     {
+
+
         return [
+            'image' => $this->faker->imageUrl(600, 400),
             'title' => $this->faker->name,
             'description'=> $this->faker->realText($this->faker->numberBetween(10,20)),
             'price' => $this->faker->randomFloat(10, 20, 30),
