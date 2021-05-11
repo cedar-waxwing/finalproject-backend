@@ -14,12 +14,35 @@ class PostController extends Controller
      */
     public function index()
     {
-        return Post::all();
-      //Read
+        return Post::all()->toArray();
+        //Read
     }
 
+//this function is to search through posts. Not using eloquent.
 
-      public function show($id)
+//Limit this to alphanumeric on the front end to prevent injection
+public function search(Request $request)
+{
+    //get search value from the request
+    $search = $request->search;
+
+    //search in the title and description columns from the post table
+    $post = Post::query()
+    ->where('title', 'like', "%".$search."%")
+    ->orWhere('description', 'like', "%".$search."%")
+    ->get();
+
+    //return the search view with the results compacted
+    return $post;
+}
+
+    //using eloquent
+    public function myposts(Request $request)
+    {
+        return Post::where('user_id', $request->user()->id)->get()->toArray();
+    }
+
+    public function show($id)
     {
         return Post::find($id);
         //Read, individual post
@@ -34,13 +57,15 @@ class PostController extends Controller
     {
         $post = new Post();
 
+        $post->image = $request->image;
         $post->title = $request->title;
         $post->description = $request->description;
         $post->price = $request->price;
         $post->contact = $request->contact;
+        $post->user_id = $request->user()->id;
 
-    $post->save(); //Create
-    return $post->toArray();
+        $post->save(); //Create
+        return $post->toArray();
     }
 
     /**
@@ -51,16 +76,17 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-           $post = Post::find($id);
+        $post = Post::find($id);
 
-    // takes in user input -- prevents error when you change just one item
-    $post->title = $request->title;
-    $post->description = $request->description;
-    $post->price = $request->price;
-    $post->contact = $request->contact;
+        // takes in user input -- prevents error when you change just one item
+        $post->image = $request->image;
+        $post->title = $request->title;
+        $post->description = $request->description;
+        $post->price = $request->price;
+        $post->contact = $request->contact;
 
-    $post->save(); //Update
-    return $post->toArray();
+        $post->save(); //Update
+        return $post->toArray();
     }
 
     /**
@@ -72,6 +98,6 @@ class PostController extends Controller
     public function destroy($id)
     {
         Post::destroy($id);
-      return "Successfully deleted post " .$id;
+        return "Successfully deleted post " . $id;
     }
 }

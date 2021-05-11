@@ -24,12 +24,15 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::get('/user', [UserController::class, 'index']);
     // log out user
     Route::get('/logout', [UserController::class, 'logout']);
+    //create posts
+    Route::post('/post/create', [PostController::class, 'create']);
+    //get my posts when logged in
+    Route::get('/posts/my', [PostController::class, 'myposts']);
 });
-
 
 Route::get('/posts/all', [PostController::class, 'index']);
 
-Route::post('/posts/create', [PostController::class, 'create']);
+Route::post('/search', [PostController::class, 'search']);
 
 // Route::post('/posts/update/{id}', [PostController::class, 'update']);
 
