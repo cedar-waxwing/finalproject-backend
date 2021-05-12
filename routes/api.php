@@ -28,13 +28,13 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::post('/post/create', [PostController::class, 'create']);
     //get my posts when logged in
     Route::get('/posts/my', [PostController::class, 'myposts']);
+
+    Route::get('/post/destroy/{id}', [PostController::class, 'destroy']);
 });
 
 Route::get('/posts/all', [PostController::class, 'index']);
 
 Route::post('/search', [PostController::class, 'search']);
-
-Route::get('/posts/destroy/{id}', [PostController::class, 'destroy']);
 
 
 // Route::post('/posts/update/{id}', [PostController::class, 'update']);

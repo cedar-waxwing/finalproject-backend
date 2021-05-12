@@ -95,9 +95,9 @@ public function search(Request $request)
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         Post::destroy($id);
-        return "Successfully deleted post " . $id;
+        return $this->myposts($request);
     }
 }
