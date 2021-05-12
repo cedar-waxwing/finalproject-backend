@@ -34,6 +34,8 @@ Route::get('/posts/all', [PostController::class, 'index']);
 
 Route::post('/search', [PostController::class, 'search']);
 
+Route::get('/posts/destroy/{id}', [PostController::class, 'destroy']);
+
+
 // Route::post('/posts/update/{id}', [PostController::class, 'update']);
 
-// Route::get('/posts/destroy/{id}', [PostController::class, 'destroy']);
